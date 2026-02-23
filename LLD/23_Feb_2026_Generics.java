@@ -1,7 +1,7 @@
 //Generics - Make Dynamic data types
 
 // Generic Variables
-public class Pair<T, V> {
+class Pair<T, V> {
     // The below dashes can be filled with Data Types which is usually a Keyword
     // But Generics allows us to create custom Data types
     // ------ first;
