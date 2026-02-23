@@ -1,5 +1,6 @@
 //Generics - Make Dynamic data types
 
+// Generic Variables
 public class Pair<T, V> {
     // The below dashes can be filled with Data Types which is usually a Keyword
     // But Generics allows us to create custom Data types
@@ -7,6 +8,16 @@ public class Pair<T, V> {
     // ------ second;
     T first;
     V last;
+}
+
+// Generic Methods
+class Utility {
+
+    public static <T> void printArray(T[] array) {
+        for (T element : array) {
+            System.out.println(element);
+        }
+    }
 }
 
 class Box<T> {
@@ -31,5 +42,17 @@ class Test {
 
         Box<Integer> intBox = new Box<>();
         intBox.set(100);
+
+        // Generic Methods
+        String[] names = { "Divya", "Java" };
+        Integer[] numbers = { 1, 2, 3 };
+
+        Utility.printArray(names);
+        Utility.printArray(numbers);
+        // names reference is on stack
+        // Array object is in heap
+        // T does NOT exist in memory
+        // It is removed during compilation (type erasure)
+        // Generics affect compile-time safety, not runtime memory layout.
     }
 }
