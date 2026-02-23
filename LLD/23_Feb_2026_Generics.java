@@ -55,4 +55,50 @@ class Test {
         // It is removed during compilation (type erasure)
         // Generics affect compile-time safety, not runtime memory layout.
     }
+
+}
+
+// Example with Equals
+
+class Point<X, Y> {
+
+    private X x;
+    private Y y;
+
+    public Point(X x, Y y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public X getX() {
+        return x;
+    }
+
+    public Y getY() {
+        return y;
+    }
+
+    @Override
+    public String toString() {
+        return "Point{" + "x=" + x + ", y=" + y + '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof Point))
+            return false;
+
+        Point<?, ?> other = (Point<?, ?>) obj;
+
+        return java.util.Objects.equals(x, other.x) &&
+                java.util.Objects.equals(y, other.y);
+    }
+
+    @Override
+    public int hashCode() {
+        return java.util.Objects.hash(x, y);
+    }
 }
