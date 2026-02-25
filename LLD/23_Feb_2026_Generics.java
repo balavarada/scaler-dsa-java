@@ -1,4 +1,6 @@
+
 //Generics - Make Dynamic data types
+import java.util.*;
 
 // Generic Variables
 class Pair<T, V> {
@@ -100,5 +102,59 @@ class Point<X, Y> {
     @Override
     public int hashCode() {
         return java.util.Objects.hash(x, y);
+    }
+}
+
+// Super and wildcards
+
+class Animal {
+}
+
+class Dog extends Animal {
+}
+
+class Puppy extends Dog {
+}
+
+class Example {
+
+    public static void addDogs(List<? super Dog> list) {
+        list.add(new Dog());
+        list.add(new Puppy()); // also allowed
+        // list.add(new Animal()); ❌ not allowed
+    }
+
+    public static void main(String[] args) {
+
+        List<Animal> animals = new ArrayList<>();
+        List<Dog> dogs = new ArrayList<>();
+        List<Object> objects = new ArrayList<>();
+
+        addDogs(animals); // ✅ Animal is super of Dog
+        addDogs(dogs); // ✅ Dog itself
+        addDogs(objects); // ✅ Object is super of Dog
+
+        // List<Puppy> puppies = new ArrayList<>();
+        // addDogs(puppies); ❌ Puppy is NOT super of Dog
+    }
+
+    public static void printList(List<? extends Dog> d) {
+
+        // List<? extends Dog>
+        // Means:
+        // A list of Dog OR any subclass of Dog
+        for (int i = 0; i < d.size(); i++) {
+            System.out.println(d.get(i));
+        }
+    }
+
+    public static void printListTop(List<? super Dog> d) {
+
+        // List<? super Dog>
+        // Means:
+        // A list of Dog OR any superclass of Dog
+        for (int i = 0; i < d.size(); i++) {
+            System.out.println(d.get(i));
+        }
     }
 }
